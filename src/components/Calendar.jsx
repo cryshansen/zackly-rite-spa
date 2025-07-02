@@ -56,15 +56,27 @@ export default function Calendar() {
 
     for (let i = startDay - 1; i >= 0; i--) {
       const day = prevMonthDays - i;
-      const isBeforeThisMonth = currentYear < today.getFullYear() ||
+      /*const isBeforeThisMonth = currentYear < today.getFullYear() ||
+        (currentYear === today.getFullYear() && currentMonth < today.getMonth());*/
+      const isBeforeToday = new Date(prevYear, prevMonth, day) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  
+      const isThisMonthInPast = currentYear < today.getFullYear() ||
         (currentYear === today.getFullYear() && currentMonth < today.getMonth());
+
+      const isDisabled = isBeforeToday || isThisMonthInPast;
 
       days.push(
         <div
           key={`prev-${day}`}
-          className={`day other-month ${isBeforeThisMonth ? 'disabled' : 'clickable'}`}
-          onClick={!isBeforeThisMonth ? () => handleDayClick(day, prevMonth, prevYear) : undefined}
-          aria-disabled={isBeforeThisMonth}
+          className={`day other-month ${isDisabled ? 'disabled' : 'clickable'}`}
+          onClick={() => {
+            if (!isDisabled) {
+              setCurrentMonth(prevMonth);
+              setCurrentYear(prevYear);
+            }
+          }}
+          aria-disabled={isDisabled}
+          title={isDisabled ? "Can't book past dates" : "Go to previous month"}
         >
           {day}
         </div>
@@ -79,20 +91,31 @@ export default function Calendar() {
         currentYear === today.getFullYear();
       const isPast =
         date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const isWeekend = date.getDay() === 0 || date.getDay() === 6;
 
       const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
       const bookingCount = bookedDates[dateStr] || 0;
 
       let className = "day";
-      if (bookingCount >= 4) className += " heavy-booked";
-      else if (bookingCount >= 2) className += " medium-booked";
-      else if (bookingCount === 1) className += " light-booked";
-      else className += " available";
+     if (isWeekend) {
+        className += " taken weekend";
+      } else if (bookingCount >= 4) {
+        className += " heavy-booked";
+      } else if (bookingCount >= 2) {
+        className += " medium-booked";
+      } else if (bookingCount === 1) {
+        className += " light-booked";
+      } else {
+        className += " available";
+      }
 
-      if (isPast) className += " disabled";
-      else className += " clickable";
+      if (isPast || isWeekend) {
+        className += " disabled";
+      } else {
+        className += " clickable";
+      }
       if (isToday) className += " today";
-
+   
       days.push(
         <div
           key={`current-${d}`}
@@ -112,8 +135,13 @@ export default function Calendar() {
       days.push(
         <div
           key={`next-${i}`}
-          className="day other-month clickable"
-          onClick={() => handleDayClick(i, nextMonth, nextYear)}
+          className="day taken clickable"
+          onClick={() => {
+              setCurrentMonth(nextMonth);
+              setCurrentYear(nextYear);
+            } 
+          }
+          title="See next month"
         >
           {i}
         </div>

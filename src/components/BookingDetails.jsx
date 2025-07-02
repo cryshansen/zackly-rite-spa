@@ -122,7 +122,7 @@ export default function BookingDetails() {
 
         {/* Fields */}
         <div className="mb-3">
-          <label className="form-label">First Name</label>
+          <label className="form-label border-0 booking">First Name</label>
           <input
             className={`form-control ${errors.firstname ? "is-invalid" : ""}`}
             {...register("firstname")}
@@ -131,7 +131,7 @@ export default function BookingDetails() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Last Name</label>
+          <label className="form-label  border-0 booking">Last Name</label>
           <input
             className={`form-control ${errors.lastname ? "is-invalid" : ""}`}
             {...register("lastname")}
@@ -140,7 +140,7 @@ export default function BookingDetails() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Phone</label>
+          <label className="form-label  border-0 booking">Phone</label>
           <input
             className={`form-control ${errors.phone ? "is-invalid" : ""}`}
             {...register("phone")}
@@ -149,7 +149,7 @@ export default function BookingDetails() {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Email</label>
+          <label className="form-label  border-0 booking">Email</label>
           <input
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
             {...register("email")}

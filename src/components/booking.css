@@ -1,17 +1,16 @@
 
- label {
+ label.booking{
         /*height: 100%;*/
-        display: block;
-        background: white;
-        border: 0px solid ;
-        border-radius: 0px;
-        padding: .25rem;
-        margin-bottom: 1rem;
-        /*margin: 1rem;*/
-        text-align: left;
-        box-shadow: none;
-        position: relative;
-    }
+    box-shadow: none;
+    border: 0 !important;
+    background: none;
+    border: none;
+    border-radius: none;
+    /*margin: 1rem;*/
+    text-align: left;
+    box-shadow: none;
+    position: relative;
+ }
         
 
  
