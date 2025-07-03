@@ -14,7 +14,7 @@ export default function AvailableTimes() {
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const { captchaRef, captchaId } = useCaptcha();
-  //const [isLoading, setIsLoading] = useState(false);
+
   const { showLoader, hideLoader } = useLoading();
 
   useEffect(() => {
@@ -39,10 +39,12 @@ export default function AvailableTimes() {
           const times = data.map(r => r.timeslot);
           console.log('timeslots:times: ' + times);
           setAvailableTimes(times); // make sure you define this
-          setIsLoading();
+
         })
-        .catch(err => console.error("Error loading times:", err));
-        hideLoader();
+        .catch(err => console.error("Error loading times:", err))
+        .finally(() => {
+          hideLoader();
+        });
 
     }, [searchParams]);
 
@@ -146,7 +148,7 @@ export default function AvailableTimes() {
         <div className="row mt-4">
           <div className="col"></div>
           <div className="col center">
-            <button className="btn btn-primary" title="Select a time!" onClick={handleBooking} disabled={ !selectedTime || !captchaId} >
+            <button className="btn btn-primary" title="Select a time!" onClick={handleBooking} disabled={ !selectedTime } >
               Book it!
             </button>
           </div>
