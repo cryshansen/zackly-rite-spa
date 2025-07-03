@@ -108,7 +108,7 @@
     padding: 1%;
     font-size:13pt;
     text-align:center;
-    border-radius: 10%;
+    border-radius: 10px;
     border: solid 1px #ddd;
 }
 
@@ -119,7 +119,7 @@
 }
 
 .today{
-    background-color: #2e9083!important;
+    background-color: #c7cf7a!important;
 }
 
 .calendar .calendar-dates .days .day.selected

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-
+import { useLoading } from "../context/LoadingContext";
 import useCaptcha from "../hooks/useCaptcha";
 
 import "./available-times.css"; // custom styling if needed
@@ -14,8 +14,11 @@ export default function AvailableTimes() {
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const { captchaRef, captchaId } = useCaptcha();
+  //const [isLoading, setIsLoading] = useState(false);
+  const { showLoader, hideLoader } = useLoading();
 
   useEffect(() => {
+    showLoader();
     const date = searchParams.get("bdate");
     if (!date) return;
 
@@ -36,15 +39,17 @@ export default function AvailableTimes() {
           const times = data.map(r => r.timeslot);
           console.log('timeslots:times: ' + times);
           setAvailableTimes(times); // make sure you define this
+          setIsLoading();
         })
         .catch(err => console.error("Error loading times:", err));
+        hideLoader();
 
     }, [searchParams]);
 
     const handleBooking = async () => {
         //const gctoken = document.getElementById("g-recaptcha-response")?.value; //seems to work in this case
         const gctoken = captchaId !== null ? window.grecaptcha?.getResponse(captchaId) : "";
-
+        
         console.log();
         const cotoken = getToken();
         const bookdatetime = `${bdate} ${selectedTime}`;
@@ -82,6 +87,8 @@ export default function AvailableTimes() {
         } catch (error) {
           console.error("Booking failed", error);
           alert("Something went wrong. Please try again.");
+        } finally {
+           //hideLoader(); // stop spinner
         }
     };
 
@@ -91,7 +98,7 @@ export default function AvailableTimes() {
 
   return (
     <div className="container">
-      <div className="header">
+      <div className="header mt-5">
         <h3>What's Available</h3>
       </div>
       <hr />
@@ -134,12 +141,12 @@ export default function AvailableTimes() {
         </div>
 
         {/* Google Recaptcha (if needed) */}
-         <div className="g-recaptcha mb-3" ref={captchaRef}  data-action="Booking"></div>
+         <div className="g-recaptcha mt-3 mb-3 " ref={captchaRef}  data-action="Booking"></div>
 
         <div className="row mt-4">
           <div className="col"></div>
           <div className="col center">
-            <button className="btn btn-primary" onClick={handleBooking} disabled={!selectedTime} >
+            <button className="btn btn-primary" title="Select a time!" onClick={handleBooking} disabled={ !selectedTime || !captchaId} >
               Book it!
             </button>
           </div>

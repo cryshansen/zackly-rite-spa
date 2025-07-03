@@ -1,9 +1,6 @@
 
-.container { margin: 150px auto; margin-top:50px; }
-h1 {
-  color: hsla(215, 5%, 10%, 1);
-  margin-bottom: 2rem;
-}
+
+
 section {
   display: flex;
   flex-flow: row wrap;
@@ -12,6 +9,12 @@ section > div {
   flex: 1;
   padding: 0.5rem;
 }
+
+.content_bod >.row{
+  margin-left: 0px;
+}
+
+
 input[type="radio"] {
   display: none;
 }
