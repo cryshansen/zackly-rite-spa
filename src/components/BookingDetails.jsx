@@ -91,13 +91,13 @@ export default function BookingDetails() {
     
   };
 
-  // Auto-fill test
-  const handleFakeLogin = () => {
+  // Auto-fill test not for production
+/*  const handleFakeLogin = () => {
     setValue("firstname", "Crystal");
     setValue("lastname", "Hansen");
     setValue("email", "test@example.com");
     setValue("phone", "123-456-7890");
-  };
+  };*/
 
   return (
     <div className="container my-5">
@@ -160,9 +160,9 @@ export default function BookingDetails() {
         <div className="g-recaptcha mb-3" ref={captchaRef}  data-action="Confirm"></div>
 
         <div className="d-flex justify-content-between mt-4">
-          <button type="button" className="btn btn-secondary" onClick={handleFakeLogin}>
+           {/*<button type="button" className="btn btn-secondary" onClick={handleFakeLogin}>
             Sign in (Example)
-          </button>
+          </button> */}
           <button type="submit" className="btn btn-primary">
             Confirm it!
           </button>

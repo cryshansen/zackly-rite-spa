@@ -76,7 +76,7 @@ export default function BookingConfirmation() {
       <div className="modal-footer d-flex flex-column justify-content-center border-0">
         <p className="text-muted">See you soon!</p>
         <button onClick={handleSignOut} className="btn btn-primary mt-2">
-          Sign out
+          Back Home
         </button>
       </div>
     </div>
