@@ -23,7 +23,7 @@ This is a single-page React application designed for booking appointments with Z
 ---
 
 ## 🛠️ Tech Stack
-
+```
 | Layer        | Technology                  |
 |-------------|------------------------------|
 | Frontend     | React, Vite                 |
@@ -34,11 +34,11 @@ This is a single-page React application designed for booking appointments with Z
 | Meta Tags    | React Helmet                |
 | Backend API  | PHP (REST)                  |
 | Deployment   | Vercel / Netlify (suggested)|
-
+```
 ---
 
 ## 📁 Project Structure
-
+```
 /src
 │
 ├── components/
@@ -55,7 +55,7 @@ This is a single-page React application designed for booking appointments with Z
 ├── App.jsx
 ├── main.jsx
 └── routes.jsx
-
+```
 
 🧪 TODOs
  Add unit tests for form validation
