@@ -59,9 +59,5 @@ This is a single-page React application designed for booking appointments with Z
 
 🧪 TODOs
  Add unit tests for form validation
-
- Add calendar navigation (month/year)
-
  Admin dashboard for managing bookings
-
  Dark mode toggle
